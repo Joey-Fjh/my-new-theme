@@ -74,6 +74,31 @@
       padding-top: 0.5rem;
     }
   }
+
+  @media screen and (max-width: 750px){
+    .head__search__input{
+      display: none;
+    }
+  }
+  
+  .head__search__input{
+    width: 200px;
+    height: 40px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    outline: none;
+    outline-offset:none;
+    box-shadow: none;
+  }
+  
+  .head__search__input::placeholder {
+    color: #999;
+  }
 </style>
 
 {%- style -%}
@@ -172,7 +197,7 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ section.settings.logo_text }}</span>
+          <span class="h2">{{ settings.logo_text }}</span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -215,7 +240,7 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ section.settings.logo_text }}</span>
+          <span class="h2">{{ settings.logo_text }}</span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -224,6 +249,8 @@
     {%- endif -%}
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+      <input type="text" class="head__search__input" placeholder="Search...">
+
       <div class="desktop-localization-wrapper">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <localization-form class="small-hide medium-hide" data-prevent-hide>
@@ -246,8 +273,12 @@
             {%- endform -%}
           </localization-form>
         {%- endif -%}
-      </div>
+      </div>  
       {% render 'header-search', input_id: 'Search-In-Modal' %}
+
+      <a href="" class="header__icon link focus-inset">
+        <span class="svg-wrapper">{{ 'icon-favorite.svg' | inline_asset_content }}</span>
+      </a>
 
       {%- if shop.customer_accounts_enabled -%}
         <a
@@ -472,12 +503,6 @@
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
-    {
-      "type":"text",
-      "id":"logo_text",
-      "default":"LOGO",
-      "label": "文本",
-    },
     {
       "type": "select",
       "id": "logo_position",

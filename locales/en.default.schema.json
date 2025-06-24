@@ -150,6 +150,9 @@
     "logo": {
       "name": "Logo",
       "settings": {
+        "logo_text":{
+          "label":"Logo Text"
+        },
         "logo_image": {
           "label": "Logo"
         },

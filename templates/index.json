@@ -14,6 +14,7 @@
       "blocks": {
         "heading": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "Browse our latest products",
             "heading_size": "h0"
@@ -21,6 +22,7 @@
         },
         "button": {
           "type": "buttons",
+          "disabled": true,
           "settings": {
             "button_label_1": "Shop all",
             "button_link_1": "shopify://collections/all",
@@ -36,35 +38,87 @@
         "button"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
+        "image": "shopify://shop_images/bannel.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "ambient",
         "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
         "desktop_content_alignment": "center",
+        "show_text_box": false,
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
         "show_text_below": false
+      }
+    },
+    "brand_carousel_67timH": {
+      "type": "brand-carousel",
+      "blocks": {
+        "logo_Je7UyQ": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "CHANEL",
+            "bold": true
+          }
+        },
+        "logo_GELdrr": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "LOUIS VUITTON",
+            "bold": false
+          }
+        },
+        "logo_PxBJzt": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "PRADA",
+            "bold": true
+          }
+        },
+        "logo_p7d3yb": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "Calvin Klein",
+            "bold": false
+          }
+        },
+        "logo_wymCEa": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "DENIM",
+            "bold": true
+          }
+        }
+      },
+      "block_order": [
+        "logo_Je7UyQ",
+        "logo_GELdrr",
+        "logo_PxBJzt",
+        "logo_p7d3yb",
+        "logo_wymCEa"
+      ],
+      "name": "品牌轮播区",
+      "settings": {
+        "background_color": "#ffffff"
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
+        "collection": "夏季产品系列",
         "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
+        "logo_position": "center",
+        "title": "OUR BEST SELLRS",
+        "heading_size": "h1",
+        "description": "<p><strong>MOST LOVED BY YOU</strong></p>",
+        "show_description": false,
+        "description_style": "subtitle",
+        "columns_desktop": 3,
         "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "outline",
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -72,13 +126,501 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
+      }
+    },
+    "brand_carousel_qxQGAx": {
+      "type": "brand-carousel",
+      "blocks": {
+        "logo_aK8GVi": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "CHANEL",
+            "bold": true
+          }
+        },
+        "logo_aDJedK": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "LOUIS VUITTON",
+            "bold": false
+          }
+        },
+        "logo_D3CJRz": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "PRADA",
+            "bold": true
+          }
+        },
+        "logo_eDLNrb": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "Calvin Klein",
+            "bold": false
+          }
+        },
+        "logo_63TnQw": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "DENIM",
+            "bold": true
+          }
+        }
+      },
+      "block_order": [
+        "logo_aK8GVi",
+        "logo_aDJedK",
+        "logo_D3CJRz",
+        "logo_eDLNrb",
+        "logo_63TnQw"
+      ],
+      "name": "Brand Logos",
+      "settings": {
+        "background_color": "#0ebe40"
+      }
+    },
+    "brand_carousel_hbpNVc": {
+      "type": "brand-carousel",
+      "blocks": {
+        "logo_EJtx3p": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "CHANEL",
+            "bold": true
+          }
+        },
+        "logo_rcmU6U": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "LOUIS VUITTON",
+            "bold": false
+          }
+        },
+        "logo_mChMfW": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "PRADA",
+            "bold": true
+          }
+        },
+        "logo_Ybp6Ae": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "Calvin Klein",
+            "bold": false
+          }
+        },
+        "logo_MAEdHi": {
+          "type": "logo",
+          "settings": {
+            "brand_name": "DENIM",
+            "bold": true
+          }
+        }
+      },
+      "block_order": [
+        "logo_EJtx3p",
+        "logo_rcmU6U",
+        "logo_mChMfW",
+        "logo_Ybp6Ae",
+        "logo_MAEdHi"
+      ],
+      "name": "Brand Logos",
+      "settings": {
+        "background_color": "#334fb4"
+      }
+    },
+    "info_bannel_3NNC9U": {
+      "type": "info-bannel",
+      "blocks": {
+        "my_shop_now_nJnigN": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#f3f3f3",
+            "location_top": "300",
+            "location_left": "10",
+            "text_position_relative": "left-right",
+            "info_text": "Black solid dress",
+            "info_text_bold": false,
+            "button_text": "",
+            "button_text_hide": true,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        },
+        "my_shop_now_PCTNJk": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#ffffff",
+            "location_top": "330",
+            "location_left": "10",
+            "text_position_relative": "left-right",
+            "info_text": "Castual shirt",
+            "info_text_bold": false,
+            "button_text": "",
+            "button_text_hide": false,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        },
+        "my_shop_now_LfQjPb": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#ffffff",
+            "location_top": "360",
+            "location_left": "10",
+            "text_position_relative": "left-right",
+            "info_text": "Crop top",
+            "info_text_bold": false,
+            "button_text": "",
+            "button_text_hide": false,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        },
+        "my_shop_now_nxEVme": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#ffffff",
+            "location_top": "390",
+            "location_left": "10",
+            "text_position_relative": "left-right",
+            "info_text": "Cut Rib Top",
+            "info_text_bold": false,
+            "button_text": "",
+            "button_text_hide": true,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        },
+        "my_shop_now_B9M3ac": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#ffffff",
+            "location_top": "420",
+            "location_left": "10",
+            "text_position_relative": "left-right",
+            "info_text": "Fedora hat",
+            "info_text_bold": false,
+            "button_text": "",
+            "button_text_hide": true,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        },
+        "my_shop_now_BfcjcA": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#ffffff",
+            "location_top": "500",
+            "location_left": "10",
+            "text_position_relative": "up-down",
+            "info_text": "Cozy Styles to Warm",
+            "info_text_bold": true,
+            "button_text": "Shop Now",
+            "button_text_hide": false,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        },
+        "my_shop_now_imRQxt": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#ffffff",
+            "location_top": "500",
+            "location_left": "300",
+            "text_position_relative": "up-down",
+            "info_text": "Styling Brown Bags",
+            "info_text_bold": true,
+            "button_text": "Shop Now",
+            "button_text_hide": false,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        },
+        "my_shop_now_hmD6Tf": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#ffffff",
+            "location_top": "500",
+            "location_left": "600",
+            "text_position_relative": "up-down",
+            "info_text": "Most Winter Dresses",
+            "info_text_bold": true,
+            "button_text": "Shop Now",
+            "button_text_hide": false,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        },
+        "my_shop_now_AEJAfd": {
+          "type": "my-shop-now",
+          "name": "Shop Now",
+          "settings": {
+            "font_color": "#ffffff",
+            "location_top": "500",
+            "location_left": "900",
+            "text_position_relative": "up-down",
+            "info_text": "Swim Wears Trends",
+            "info_text_bold": true,
+            "button_text": "Shop Now",
+            "button_text_hide": false,
+            "button_text_bold": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "my_shop_now_nJnigN",
+        "my_shop_now_PCTNJk",
+        "my_shop_now_LfQjPb",
+        "my_shop_now_nxEVme",
+        "my_shop_now_B9M3ac",
+        "my_shop_now_BfcjcA",
+        "my_shop_now_imRQxt",
+        "my_shop_now_hmD6Tf",
+        "my_shop_now_AEJAfd"
+      ],
+      "name": "Info Bannel",
+      "settings": {
+        "image": "shopify://shop_images/a-bridge-sitting-in-thick-pink-and-purple-fog.jpg"
+      }
+    },
+    "my_featured_collection_iFFhdw": {
+      "type": "my-featured-collection",
+      "name": "Featured Products",
+      "settings": {
+        "title": "EXPERIENCE OPULENCE LIKE NEVER BEFORE",
+        "products": [
+          "black-leather-bag",
+          "blue-silk-tuxedo",
+          "chequered-red-shirt",
+          "classic-leather-jacket"
+        ]
+      }
+    },
+    "promo_banner_XghrLX": {
+      "type": "promo-banner",
+      "blocks": {
+        "countdown_tnKkAE": {
+          "type": "countdown",
+          "settings": {
+            "style": "default",
+            "end_time": "2025-7-15 23:59:59"
+          }
+        }
+      },
+      "block_order": [
+        "countdown_tnKkAE"
+      ],
+      "name": "Promo Banner",
+      "settings": {
+        "image": "shopify://shop_images/person-tilts-their-head-up-and-looks-at-the-camera.jpg",
+        "image_alt": "Promo Image",
+        "text_top": "ONLINE ONLY!",
+        "headline": "UP TO 50% OFF EVERYTHING",
+        "button_text": "SHOP NOW",
+        "button_link": ""
+      }
+    },
+    "video_H4KwDq": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "video_text": "",
+        "enable_video_looping": true,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "cover_image": "shopify://shop_images/hiker-running-up-beaten-track-between-the-trees.jpg",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "why_choose_us_KJFd3C": {
+      "type": "why-choose-us",
+      "blocks": {
+        "accordion_mBqijJ": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Unrivaled Quality",
+            "content": "123"
+          }
+        },
+        "accordion_g8zAn6": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Sustains bullons",
+            "content": "123"
+          }
+        },
+        "accordion_LtG7pL": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Unrivaled Variety",
+            "content": "123"
+          }
+        },
+        "accordion_4iXDeP": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Legacy Of Excellence",
+            "content": "123"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_mBqijJ",
+        "accordion_g8zAn6",
+        "accordion_LtG7pL",
+        "accordion_4iXDeP"
+      ],
+      "name": "Why Choose Us",
+      "settings": {
+        "image": "shopify://shop_images/chicago-city-lights-at-night.jpg",
+        "image_alt": "Why Choose Us",
+        "title": "Why Choose Us",
+        "desc": "We pride ourselves on offering products that meet the highest standards of quality..."
+      }
+    },
+    "feature_section_QEkmYW": {
+      "type": "feature-section",
+      "blocks": {
+        "feature_item_cG9U46": {
+          "type": "feature_item",
+          "settings": {
+            "text": "We believe that fashion should be stylish, affordable and accessible to everyone."
+          }
+        },
+        "feature_item_x7prQn": {
+          "type": "feature_item",
+          "settings": {
+            "text": "Body positivity and inclusivity are values that are at the heart of our brand."
+          }
+        },
+        "feature_item_yHAGLU": {
+          "type": "feature_item",
+          "settings": {
+            "text": "We want everyone to look and feel good, while also doing our part to help the environment."
+          }
+        }
+      },
+      "block_order": [
+        "feature_item_cG9U46",
+        "feature_item_x7prQn",
+        "feature_item_yHAGLU"
+      ],
+      "name": "Feature Section",
+      "settings": {
+        "image1": "shopify://shop_images/person-fishing-on-the-beach-is-silhouetted-at-sunset.jpg",
+        "image1_alt": "Top Image",
+        "image2": "shopify://shop_images/two-people-surfing-in-blue-choppy-water.jpg",
+        "image2_alt": "Bottom Image",
+        "label": "EVERYDAY ESSENTIALS",
+        "title": "Sustainable TrendsYou'll Love Forever.",
+        "link_text": "OUR STORY",
+        "link_url": ""
+      }
+    },
+    "media_carousel_ktXkDh": {
+      "type": "media-carousel",
+      "blocks": {
+        "media_slide_LfYBh4": {
+          "type": "media_slide",
+          "settings": {
+            "image": "shopify://shop_images/hiker-running-up-beaten-track-between-the-trees.jpg",
+            "image_alt": "Slide Image",
+            "video_url": ""
+          }
+        },
+        "media_slide_F4JDn3": {
+          "type": "media_slide",
+          "settings": {
+            "image": "shopify://shop_images/portrait-of-young-woman-in-autumn-colored-coat.jpg",
+            "image_alt": "Slide Image",
+            "video_url": ""
+          }
+        },
+        "media_slide_xq6Kxc": {
+          "type": "media_slide",
+          "settings": {
+            "image": "shopify://shop_images/iphone-light-art-photography.jpg",
+            "image_alt": "Slide Image",
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "media_slide_LfYBh4",
+        "media_slide_F4JDn3",
+        "media_slide_xq6Kxc"
+      ],
+      "name": "Media Carousel",
+      "settings": {}
+    },
+    "image_color_compare_WpyKbp": {
+      "type": "image-color-compare",
+      "name": "Image Colour Compare",
+      "settings": {
+        "subtitle": "OUR BEST SELLERS",
+        "title": "CHOOSE YOUR COLOUR",
+        "left_image": "shopify://shop_images/two-people-surfing-in-blue-choppy-water.jpg",
+        "right_image": "shopify://shop_images/person-fishing-on-the-beach-is-silhouetted-at-sunset.jpg"
+      }
+    },
+    "1750755844ea743ca0": {
+      "type": "apps",
+      "blocks": {
+        "sc_store_locator_map_map_pUYjfN": {
+          "type": "shopify://apps/sc-store-locator-map/blocks/map/4ca379c6-722c-49d3-b6ec-a7fe7c1061a5",
+          "settings": {
+            "distance_unit": "KM",
+            "display_title": true,
+            "display_header_html": false,
+            "display_search": true,
+            "display_footer_html": false,
+            "search_text": "#121212",
+            "search_background": "linear-gradient(180deg, rgba(245, 245, 245, 1), rgba(243, 243, 243, 1) 100%)",
+            "display_addresses_sidebar": true,
+            "map_theme": "default",
+            "google_maps_language": "en"
+          }
+        }
+      },
+      "block_order": [
+        "sc_store_locator_map_map_pUYjfN"
+      ],
+      "settings": {
+        "include_margins": true
       }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "brand_carousel_67timH",
+    "featured_collection",
+    "brand_carousel_qxQGAx",
+    "brand_carousel_hbpNVc",
+    "info_bannel_3NNC9U",
+    "my_featured_collection_iFFhdw",
+    "promo_banner_XghrLX",
+    "video_H4KwDq",
+    "why_choose_us_KJFd3C",
+    "feature_section_QEkmYW",
+    "media_carousel_ktXkDh",
+    "image_color_compare_WpyKbp",
+    "1750755844ea743ca0"
   ]
 }

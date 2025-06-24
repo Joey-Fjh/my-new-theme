@@ -1,0 +1,34 @@
+{{ 'section-featured-products.css' | asset_url | stylesheet_tag }}
+
+<section class="featured-products-section">
+  <div class="section-title">
+    <h2>{{ section.settings.title }}</h2>
+  </div>
+  <div class="products-grid">
+    {% for product in section.settings.products %}
+      {% render 'my-features-card', product: product %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products"
+    }
+  ],
+  "presets": [{
+    "name": "Featured Products"
+  }]
+}
+{% endschema %}

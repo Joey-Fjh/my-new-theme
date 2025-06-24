@@ -1,0 +1,232 @@
+{% stylesheet %}
+  .media-carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 0;
+}
+.media-carousel-track {
+  display: flex;
+  overflow: visible;
+  width: 900px;
+  position: relative;
+  justify-content: center;
+}
+.media-carousel-slide {
+  flex: 0 0 60%;
+  margin: 0 24px;
+  opacity: 0.5;
+  transform: scale(0.92);
+  transition: opacity 0.3s, transform 0.3s;
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  z-index: 1;
+  cursor: pointer;
+}
+.media-carousel-slide.is-active {
+  opacity: 1;
+  transform: scale(1.05);
+  z-index: 2;
+  cursor: default;
+}
+.carousel-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  border-radius: 32px;
+}
+.carousel-arrow {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 2rem;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  transition: background 0.2s;
+}
+.carousel-arrow:hover {
+  background: #eee;
+}
+.carousel-arrow--left {
+  margin-right: 12px;
+}
+.carousel-arrow--right {
+  margin-left: 12px;
+}
+.carousel-play-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  cursor: pointer;
+  z-index: 4;
+}
+.carousel-play-icon {
+  color: #222;
+  font-size: 2.2rem;
+}
+.carousel-pagination {
+  display: flex;
+  justify-content: center;
+  margin: 18px;
+  gap: 10px;
+}
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.carousel-dot.is-active {
+  background: #222;
+}
+@media (max-width: 750px) {
+  .media-carousel-track {
+    width: 100vw;
+  }
+  .media-carousel-slide {
+    flex: 0 0 80vw;
+    margin: 0 8px;
+  }
+  .carousel-image {
+    height: 220px;
+  }
+}
+{% endstylesheet %}
+
+<section class="media-carousel-section">
+  <div class="media-carousel-container">
+    <button class="carousel-arrow carousel-arrow--left" aria-label="Previous">&#10094;</button>
+    <div class="media-carousel-track">
+      {% for block in section.blocks %}
+        <div class="media-carousel-slide{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <img src="{{ block.settings.image | img_url: '800x600' }}" alt="{{ block.settings.image_alt | escape }}" class="carousel-image" width="600" height="450">
+          {% if block.settings.video_url != blank %}
+            <button class="carousel-play-btn" aria-label="Play Video">
+              <span class="carousel-play-icon">&#9654;</span>
+            </button>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-arrow carousel-arrow--right" aria-label="Next">&#10095;</button>
+  </div>
+  <div class="carousel-pagination">
+    {% for block in section.blocks %}
+      <button class="carousel-dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}"></button>
+    {% endfor %}
+  </div>
+</section>
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  const slides = Array.from(document.querySelectorAll('.media-carousel-slide'));
+  const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+  const leftBtn = document.querySelector('.carousel-arrow--left');
+  const rightBtn = document.querySelector('.carousel-arrow--right');
+  let current = 0;
+
+  function updateCarousel(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+    });
+    current = index;
+  }
+
+  leftBtn.addEventListener('click', function() {
+    let idx = (current - 1 + slides.length) % slides.length;
+    updateCarousel(idx);
+  });
+  rightBtn.addEventListener('click', function() {
+    let idx = (current + 1) % slides.length;
+    updateCarousel(idx);
+  });
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', function() {
+      updateCarousel(i);
+    });
+  });
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', function() {
+      if (i !== current) updateCarousel(i);
+    });
+  });
+  // 可选：播放按钮逻辑
+  document.querySelectorAll('.carousel-play-btn').forEach((btn, i) => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // 这里可弹出视频modal或跳转
+      alert('Play video: ' + slides[i].querySelector('img').alt);
+    });
+  });
+});
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Media Carousel",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "media_slide",
+      "name": "Media Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image Alt",
+          "default": "Slide Image"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Media Carousel",
+      "blocks": [
+        { "type": "media_slide" },
+        { "type": "media_slide" },
+        { "type": "media_slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

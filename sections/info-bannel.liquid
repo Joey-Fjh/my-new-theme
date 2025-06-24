@@ -1,0 +1,83 @@
+{% stylesheet %}
+  .info-bannel{
+    padding: 2rem 0rem;
+    .container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      .image_container{
+        position: relative;
+      }
+      
+       .image{
+          width: 100%;
+          height: auto;
+          display: block;
+          object-fit: cover;
+      }
+    }
+  }
+{% endstylesheet %}
+
+{%- liquid 
+    assign full_width = '100vw'
+    assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'  
+-%}
+
+<div class="info-bannel">
+  <div class="container">
+    {% if section.settings.image != blank %}
+      <div class="image_container">
+        {%- assign image_alt = section.settings.image_alt | default: shop.name | escape -%}
+        {%- assign image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio -%}
+        {%- assign image_class = 'image' -%}
+        {{ 
+          section.settings.image 
+          | image_url: width: 3840 
+          | image_tag: 
+            alt: image_alt,
+            class: image_class,
+            width: section.settings.image.width,
+            height: image_height,
+            widths: widths,
+            sizes: full_width,
+            preload: true 
+        }} 
+        {% for block in section.blocks %}
+            {% render block %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div>
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Info Bannel",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "id": "image",
+        "type": "image_picker",
+        "label": "选择图片",
+        
+      },
+    ],
+    "blocks": [
+      {"type": "my-shop-now"}
+    ],
+    "max_blocks": 10,
+    "presets": [
+      {
+        "name": "Info Bannel"
+      }
+    ]
+  }
+{% endschema %}

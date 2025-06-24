@@ -1,0 +1,132 @@
+{% stylesheet %}
+  .brand-logos-wrapper{
+    padding: 40px 0px;
+    background: #fff;
+  }
+
+  .brand-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .brand-logo{
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+  }
+
+  .brand-logo img{
+    max-height: 40px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transiton: filter 0.3s ease;
+  }
+
+  .brand-logo img:hover{
+    filter: grayscale(0%);
+  }
+
+  .brand-name{
+    font-family: 'Helvetica Neue',sans-serif;
+    color: #000;
+    text-transform: uppercase;
+  }
+  
+  /* 移动端优化 */
+  @media (max-width: 750px){
+    .brand-logos{
+      gap: 30px;
+    }
+
+    .brand-logo img{
+      max-height: 30px;
+    }
+
+    .brand-name{
+      font-size: 14px;
+    }
+  }
+{% endstylesheet %}
+
+<style>
+  #{{ section.id }} .brand-logos-style{
+    background: {{section.settings.background_color}};
+  }
+</style>
+
+<div id="{{ section.id }}" class="brand-logos-wrapper">
+  <div class="brand-logos brand-logos-style">
+    {% for block in section.blocks %}
+      <div class="brand-logo">
+        {% if block.settings.image %}
+          <image
+            src="{{ block.settings.image | image_url: width: 200 }}"
+            alt="{{ block.settings.brand_name | escape }}"
+          />
+        {% else %}
+          <span class="brand-name" style="{% if block.settings.bold  %} font-weight:bold; {% endif %}">{{ block.settings.brand_name }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+                     
+{% schema %}
+{
+  "name": "Brand Logos",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "default": "Brand",
+        },
+        {
+          "type": "checkbox",
+          "id": "bold",
+          "label": "Bold Text",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image(optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Brand Logos",
+      "blocks": [
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

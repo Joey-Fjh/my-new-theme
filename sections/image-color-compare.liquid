@@ -1,0 +1,182 @@
+{% stylesheet %}
+  .colour-compare {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .colour-compare .text-top {
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .colour-compare .text-middle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+  }
+  .image-compare-wrapper {
+    height: 600px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    touch-action: none; /* 防止拖动页面滚动 */
+  }
+  .image-compare-wrapper img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+  }
+  .image-compare-left,
+  .image-compare-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .image-compare-right {
+    clip-path: inset(0 50% 0 0);
+    z-index: 2;
+  }
+  .slider-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px; /* 增大拖拽范围 */
+    background: rgba(255,255,255,0.7);
+    border: 10px solid #fff;
+    cursor: ew-resize;
+    z-index: 1000;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .slider-handle::before{
+    content: "⇆";
+    font-size: 24px;
+    color: #666;
+  }
+  @media screen and (max-width: 750px) {
+    .image-compare-wrapper{
+      height: 300px;
+      width: 100vw;
+    }
+  }
+{% endstylesheet %}
+
+<section class="colour-compare">
+  <div class="text-top">{{ section.settings.subtitle }}</div>
+  <div class="text-middle">{{ section.settings.title }}</div>
+
+  <div class="image-compare-wrapper">
+     {% if section.settings.left_image != blank %}
+      <img
+        src="{{ section.settings.left_image | image_url: width: 1200 }}"
+        width="{{ section.settings.left_image.width }}"
+        height="600"
+        class="image-compare-left"
+        alt="Left image"
+      />
+    {% endif %}
+    
+    {% if section.settings.right_image != blank %}
+      <img
+        src="{{ section.settings.right_image | image_url: width: 1200 }}"
+        width="{{ section.settings.right_image.width }}"
+        height="600"
+        class="image-compare-right"
+        alt="Right image"
+      />
+    {% endif %}
+    <div class="slider-handle"></div>
+  </div>
+</section>
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper = document.querySelector('.image-compare-wrapper');
+  const rightImage = wrapper.querySelector('.image-compare-right');
+  const handle = wrapper.querySelector('.slider-handle');
+
+  const moveSlider = (clientX) => {
+    const rect = wrapper.getBoundingClientRect();
+    let offset = clientX - rect.left;
+    offset = Math.max(0, Math.min(offset, rect.width));
+    const percent = (offset / rect.width) * 100;
+
+    rightImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+    handle.style.left = `${percent}%`;
+  };
+
+  let isDragging = false;
+
+  const startDrag = (e) => {
+    isDragging = true;
+    if (e.type === 'touchstart') moveSlider(e.touches[0].clientX);
+  };
+
+  const stopDrag = () => isDragging = false;
+
+  const onDrag = (e) => {
+    if (!isDragging) return;
+    if (e.type === 'touchmove') {
+      moveSlider(e.touches[0].clientX);
+    } else {
+      moveSlider(e.clientX);
+    }
+  };
+
+  handle.addEventListener('mousedown', startDrag);
+  handle.addEventListener('touchstart', startDrag, { passive: true });
+
+  document.addEventListener('mouseup', stopDrag);
+  document.addEventListener('touchend', stopDrag);
+
+  document.addEventListener('mousemove', onDrag);
+  document.addEventListener('touchmove', onDrag, { passive: false });
+
+  // 额外功能：点击图片也可移动滑块
+  wrapper.addEventListener('click', (e) => {
+    moveSlider(e.clientX);
+  });
+});
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Image Colour Compare",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Top Text (Small)",
+      "default": "OUR BEST SELLERS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main Title (Large)",
+      "default": "CHOOSE YOUR COLOUR"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Colour Compare"
+    }
+  ]
+}
+{% endschema %}

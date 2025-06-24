@@ -1,0 +1,240 @@
+{% stylesheet %}
+  .feature-section {
+  width: 100%;
+  padding: 48px 0;
+  background: #fff;
+}
+.feature-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 64px;
+  padding: 0 32px;
+}
+.feature-images {
+  position: relative;
+  min-width: 380px;
+  width: 380px;
+  height: 420px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.feature-image {
+  position: absolute;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.feature-image--top {
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 320px;
+  z-index: 2;
+}
+.feature-image--bottom {
+  bottom: 0;
+  left: 80px;
+  width: 260px;
+  height: 260px;
+  z-index: 1;
+}
+.feature-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.feature-info {
+  flex: 1;
+  padding-left: 16px;
+}
+.feature-info-label {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 18px;
+  letter-spacing: 0.08em;
+}
+.feature-info-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  line-height: 1.1;
+}
+.feature-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+}
+.feature-info-list li {
+  font-size: 1.25rem;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: flex-start;
+  color: #222;
+}
+.feature-info-list .star {
+  color: #111;
+  font-size: 1.2em;
+  margin-right: 12px;
+  line-height: 1.2;
+  display: inline-block;
+  margin-top: 2px;
+}
+.feature-info-link {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #111;
+  text-decoration: underline;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.feature-info-link:hover {
+  color: #e60023;
+}
+@media (max-width: 900px) {
+  .feature-container {
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 8px;
+  }
+  .feature-images {
+    min-width: 0;
+    width: 100%;
+    height: 260px;
+  }
+  .feature-image--top {
+    width: 180px;
+    height: 180px;
+  }
+  .feature-image--bottom {
+    left: 60px;
+    width: 120px;
+    height: 120px;
+  }
+  .feature-info {
+    padding-left: 0;
+  }
+  .feature-info-title {
+    font-size: 2rem;
+  }
+}
+{% endstylesheet %}
+
+<section class="feature-section">
+  <div class="feature-container">
+    <!-- 左侧图片区 -->
+    <div class="feature-images">
+      <div class="feature-image feature-image--top">
+        <img
+          src="{{ section.settings.image1 | img_url: '600x600' }}"
+          alt="{{ section.settings.image1_alt | escape }}"
+          width="320"
+          height="320"
+        >
+      </div>
+      <div class="feature-image feature-image--bottom">
+        <img
+          src="{{ section.settings.image2 | img_url: '600x600' }}"
+          alt="{{ section.settings.image2_alt | escape }}"
+          width="260"
+          height="260"
+        >
+      </div>
+    </div>
+    <!-- 右侧信息区 -->
+    <div class="feature-info">
+      <div class="feature-info-label">{{ section.settings.label }}</div>
+      <h2 class="feature-info-title">{{ section.settings.title }}</h2>
+      <ul class="feature-info-list">
+        {% for block in section.blocks %}
+          <li {{ block.shopify_attributes }}>
+            <span class="star">★</span>
+            {{ block.settings.text }}
+          </li>
+        {% endfor %}
+      </ul>
+      <a href="{{ section.settings.link_url }}" class="feature-info-link">{{ section.settings.link_text }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image1",
+      "label": "Top Image"
+    },
+    {
+      "type": "text",
+      "id": "image1_alt",
+      "label": "Top Image Alt",
+      "default": "Top Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image2",
+      "label": "Bottom Image"
+    },
+    {
+      "type": "text",
+      "id": "image2_alt",
+      "label": "Bottom Image Alt",
+      "default": "Bottom Image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Small Label",
+      "default": "EVERYDAY ESSENTIALS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Sustainable Trends<br>You'll Love Forever."
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link Text",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_item",
+      "name": "Feature List Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "List Text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Feature Section",
+      "blocks": [
+        { "type": "feature_item", "settings": { "text": "We believe that fashion should be stylish, affordable and accessible to everyone." } },
+        { "type": "feature_item", "settings": { "text": "Body positivity and inclusivity are values that are at the heart of our brand." } },
+        { "type": "feature_item", "settings": { "text": "We want everyone to look and feel good, while also doing our part to help the environment." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

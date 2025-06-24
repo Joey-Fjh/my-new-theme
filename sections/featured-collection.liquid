@@ -24,6 +24,25 @@
   <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+<style>
+  .title-left{
+    text-align: start;
+  }  
+  .title-center{
+    text-align: center;
+  }
+  .title-right{
+    text-align: end;
+  }
+
+  .title-mobile-center{
+    text-align: center;
+  }
+  .title-mobile-left{
+    text-align: start;
+  }
+</style>
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -68,7 +87,7 @@
   >
     <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
       {%- if section.settings.title != blank -%}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <h2 class="title-{{ section.settings.logo_position }} title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           {{ section.settings.title }}
         </h2>
       {%- endif -%}
@@ -76,7 +95,7 @@
         or section.settings.show_description
         and section.settings.collection.description != empty
       -%}
-        <div class="collection__description {{ section.settings.description_style }} rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <div class="title-{{ section.settings.logo_position }} collection__description {{ section.settings.description_style }} rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           {%- if section.settings.show_description -%}
             {{ section.settings.collection.description }}
           {%- else -%}
@@ -229,6 +248,26 @@
       "type": "header",
       "content": "t:sections.featured-collection.settings.header_text.content"
     },   
+      {
+      "type": "select",
+      "id": "logo_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "左边"
+        },
+        {
+          "value": "center", 
+          "label": "中间"
+        },
+        {
+          "value": "right",
+          "label": "右边"
+        },
+      ],
+      "default": "center",
+      "label": "产品展示位置",
+    },
     {
       "type": "inline_richtext",
       "id": "title",

@@ -1,0 +1,185 @@
+{% stylesheet %}
+  .promo-banner__container {
+    display: flex;
+    width: 100%;
+    min-height: 400px;
+    background: #f7f7f7;
+}
+.promo-banner__image {
+  flex: 0 0 50%;
+  overflow: hidden;
+  border-radius: 0;
+}
+.promo-banner__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.promo-banner__info {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 24px;
+  background: #f7f7f7;
+}
+.promo-banner__text-top {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.promo-banner__headline {
+  font-size: 2.2rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.countdown-timer {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.countdown-timer__item {
+  text-align: center;
+}
+.countdown-timer__num {
+  font-size: 2.2rem;
+  font-weight: bold;
+  display: block;
+}
+.countdown-timer__label {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: #888;
+}
+.promo-banner__button {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 32px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 12px;
+  transition: background 0.2s;
+}
+.promo-banner__button:hover {
+  background: #333;
+}
+@media (max-width: 750px) {
+  .promo-banner__container {
+    flex-direction: column;
+  }
+  .promo-banner__image, .promo-banner__info {
+    width: 100%;
+    min-height: 220px;
+  }
+  .promo-banner__info {
+    padding: 24px 8px;
+  }
+  .countdown-timer {
+    gap: 16px;
+  }
+}
+{% endstylesheet %}
+
+<section class="promo-banner">
+  <div class="promo-banner__container">
+    <div class="promo-banner__image">
+      <img
+        src="{{ section.settings.image | img_url: '900x' }}"
+        alt="{{ section.settings.image_alt | escape }}"
+        width="900"
+        height="600" 
+      />
+    </div>
+    <div class="promo-banner__info">
+      <div class="promo-banner__text-top">{{ section.settings.text_top }}</div>
+      <div class="promo-banner__headline">{{ section.settings.headline }}</div>
+      {% for block in section.blocks %}
+        {% if block.type == 'countdown' %}
+          {% render 'my-countdown-timer', block: block %}
+        {% endif %}
+      {% endfor %}
+      <a href="{{ section.settings.button_link }}" class="promo-banner__button">
+        {{ section.settings.button_text }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promo Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "default": "Promo Image"
+    },
+    {
+      "type": "text",
+      "id": "text_top",
+      "label": "Top Text",
+      "default": "ONLINE ONLY!"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "UP TO 50% OFF EVERYTHING"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "countdown",
+      "name": "Countdown Timer",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Countdown Style",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "minimal", "label": "Minimal" }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "text",
+          "id": "end_time",
+          "label": "End Time (YYYY-MM-DD HH:MM:SS)",
+          "default": "2024-12-31 23:59:59"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 1,
+  "presets": [
+    {
+      "name": "Promo Banner"
+    }
+  ]
+}
+{% endschema %}

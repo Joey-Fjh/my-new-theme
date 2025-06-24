@@ -1,0 +1,146 @@
+{% stylesheet %}
+  .my-shop-now{
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      .bold{
+        font-weight: bold;
+      }
+
+      .hidden{
+        display: none;
+      }
+    }
+    
+   .container-up-down {
+        flex-direction: column;
+    }
+    
+    .container-left-right{
+        flex-direction: raw;
+        .button_container{
+          margin-left: 1rem;
+        }
+    }
+  }
+{% endstylesheet %}
+
+<style>
+  #{{ block.id }}{
+      .font-color{
+        color: {{block.settings.font_color}};    
+      }
+    
+      @media screen and (min-width: 750px){
+        .my-shop-now-location{
+          position:absolute;
+          top:{{ block.settings.location_top | times: 1 }}px;
+          left:{{ block.settings.location_left | times: 1 }}px;
+        }
+      }
+
+      @media screen and (max-width: 750px){
+         .my-shop-now-location{
+            display:none;
+          }
+      }
+  }
+</style>
+
+<div id="{{ block.id }}">
+  <div class="my-shop-now my-shop-now-location font-color">
+    <div class="container container-{{ block.settings.text_position_relative }}">
+      <div class="info_container">
+        <span class="info-text_size {% if block.settings.info_text_bold %} bold{% endif %}">{{ block.settings.info_text }}</span>
+      </div>
+      <div class="button_container {% if block.settings.button_text_hide %} hidden {% endif %}">
+        <span class="button-text_size {% if block.settings.button_text_bold %} bold{% endif %}">{{ block.settings.button_text }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Shop NOW",
+    "settings": [
+     {
+        "type": "color",
+        "id": "font_color",
+        "label": "Font Color",
+        "default": "#fff"
+      },
+      {
+        "id":"location_top",
+        "type": "text",
+        "label": "距离上部位置",
+        "default": "0",
+      },
+      {
+         "id":"location_left",
+        "type": "text",
+        "label": "距离左部位置",
+        "default": "0",
+      },
+      {
+        "id": "text_position_relative",
+        "label": "字体位置关系",
+        "type": "select",
+        "options": [
+          {
+            "value": "up-down",
+            "label": "上-下",
+          },{
+            "value": "left-right",
+            "label": "左-右",
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "信息"
+      },
+      {
+        "id": "info_text",
+        "type": "text",
+        "label": "信息文本",
+        "default": "Shop Now's description",
+      },
+      {
+        "id": "info_text_bold",
+        "type": "checkbox",
+        "label": "是否加粗",
+        "default": false,
+      },
+      {
+        "type": "header",
+        "content": "操作"
+      },
+      {
+        "id":"button_text",
+        "type": "text",
+        "label": "操作文本",
+        "default":"Shop Now",
+      },
+      {
+        "id":"button_text_hide",
+        "type": "checkbox",
+        "label": "是否隐藏",
+        "default":false
+      },
+      {
+        "id": "button_text_bold",
+        "type": "checkbox",
+        "label": "是否加粗",
+        "default": false,
+      },
+    ],
+    "presets": [
+      {
+        "name": "Shop Now"
+      }
+    ]
+  }
+{% endschema %}

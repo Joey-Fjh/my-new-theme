@@ -1,0 +1,228 @@
+<style>
+  .why-choose-us-container {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0 40px 40px;
+  }
+  
+  .why-choose-us-image{
+    flex: 1 1 420px;
+    max-width: 420px;
+    display:flex;
+    align-items:stretch;
+  }
+
+   .why-choose-us-image img {
+     width:100%;
+     height: 100%;
+     object-fit: cover;
+     border-radius: 36px;
+     display: block;
+   }
+  
+  .why-choose-us-info {
+    flex: 2 1 0;
+    background: #f7f7f7;
+    border-radius: 36px;
+    padding: 40px 36px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .why-choose-us-title {
+    font-size: 2.6rem;
+    font-weight: bold;
+    margin-bottom: 18px;
+  }
+  .why-choose-us-desc {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .why-choose-us-accordion {
+    width: 100%;
+  }
+  
+  .accordion-item {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .accordion-header {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .accordion-header:hover {
+    color: #e60023;
+  }
+  
+  .accordion-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .accordion-icon::before, .accordion-icon::after {
+    content: '';
+    position: absolute;
+    background: #222;
+    transition: transform 0.2s;
+  }
+  
+  .accordion-icon::before {
+    width: 18px;
+    height: 2.5px;
+    top: 11px;
+    left: 3px;
+  }
+  
+  .accordion-icon::after {
+    width: 2.5px;
+    height: 18px;
+    top: 3px;
+    left: 11px;
+  }
+  
+  .open .accordion-icon::after {
+    transform: scaleY(0);
+  }
+  
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 1.05rem;
+    color: #666;
+    transition: max-height 0.1s cubic-bezier(.4,0,.2,1);
+    padding-left: 2px;
+  }
+  
+   .open .accordion-content {
+    max-height: 200px;
+    padding-bottom: 18px;
+    color: #222;
+  }
+  
+  @media (max-width: 750px) {
+    .why-choose-us-container {
+      flex-direction: column;
+      gap: 24px;
+      padding: 24px 0 0 0;
+    }
+    .why-choose-us-image,
+    .why-choose-us-image img {
+      height: auto;
+      max-width: 100%;
+    }
+    .why-choose-us-info {
+      padding: 24px 12px;
+      border-radius: 24px;
+    }
+  }
+</style>
+
+<section class="why-choose-us-section">
+  <div class="why-choose-us-container">
+    <div class="why-choose-us-image">
+      <img
+        src="{{ section.settings.image | img_url: '' }}"
+        alt="{{ section.settings.image_alt | escape }}"
+        width=""
+        height="" 
+      >
+    </div>
+    <div class="why-choose-us-info">
+      <h2 class="why-choose-us-title">{{ section.settings.title }}</h2>
+      <div class="why-choose-us-desc">{{ section.settings.desc }}</div>
+      <div class="why-choose-us-accordion">
+        {% for block in section.blocks %}
+         {% render 'accordion-item', block: block, unique_id: forloop.index %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.querySelector('.why-choose-us-accordion').addEventListener('click', function(event) {
+    // 找到最近的带有 data-unique-id 的元素
+    const targetSnippet = event.target.closest('[data-accordion-item-id]');
+    if (targetSnippet) {
+      if(targetSnippet.classList.contains('open')){
+        targetSnippet.classList.remove('open');
+      }else{
+        targetSnippet.classList.add('open'); 
+      }
+    }
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Why Choose Us",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Left Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "textarea",
+      "id": "desc",
+      "label": "Description",
+      "default": "We pride ourselves on offering products that meet the highest standards of quality..."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Why Choose Us"
+    }
+  ]
+}
+{% endschema %}
