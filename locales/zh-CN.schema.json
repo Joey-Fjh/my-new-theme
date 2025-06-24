@@ -318,6 +318,9 @@
     "logo": {
       "name": "logo",
       "settings": {
+        "logo_text":{
+          "label":"logo text"
+        },
         "logo_image": {
           "label": "logo"
         },
